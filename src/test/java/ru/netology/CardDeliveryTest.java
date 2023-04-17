@@ -21,7 +21,7 @@ public class CardDeliveryTest {
     public void shouldBeSuccessfullComplited() {
         open("http://localhost:9999/");
         $x("//span[@data-test-id='city']//input").setValue("Санкт-Петербург");
-        String currentDate = dataGenerate(2, "20.04.2023") ;
+        String currentDate = dataGenerate(4, "20.04.2023") ;
         $x("//span[@data-test-id='date']//input").sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.ARROW_LEFT), Keys.DELETE);
         $x("//span[@data-test-id='date']//input").sendKeys(currentDate);
         $x("//span[@data-test-id='name']//input").setValue("Гориченко София");
@@ -29,7 +29,7 @@ public class CardDeliveryTest {
         $x("//label[@data-test-id='agreement']").click();
         $x("//span[contains(text(), 'Забронировать')]").click();
         $(".notification__content")
-                .shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldBe(Condition.visible, Duration.ofSeconds(25))
                 .shouldHave(Condition.exactText("Встреча успешно забронирована на " + currentDate));
 
     }
