@@ -13,15 +13,16 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CardDeliveryTest {
 
-    private String dataGenerate(int addDays, String pattern) {
-        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
+    private String dataGenerate() {
+        return LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     @Test
     public void shouldBeSuccessfullComplited() {
         open("http://localhost:9999/");
         $x("//span[@data-test-id='city']//input").setValue("Санкт-Петербург");
-        String currentDate = dataGenerate(3, "dd.MM.yyyy") ;
+        String currentDate;
+        currentDate = dataGenerate();
         $x("//span[@data-test-id='date']//input").sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.ARROW_LEFT), Keys.DELETE);
         $x("//span[@data-test-id='date']//input").sendKeys(currentDate);
         $x("//span[@data-test-id='name']//input").setValue("Гориченко София");
